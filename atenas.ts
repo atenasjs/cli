@@ -2,8 +2,18 @@ import { readJson } from 'https://deno.land/std/fs/read_json.ts';
 import { exists } from 'https://deno.land/std/fs/exists.ts';
 import { join } from 'https://deno.land/std/path/mod.ts';
 import clc from 'https://deno.land/x/color/index.ts'
-import { Atenas } from 'https://raw.githubusercontent.com/atenasjs/atenas/master/mod.ts'
 
+let atenasPath = 'https://raw.githubusercontent.com/atenasjs/atenas/master/mod.ts';
+if(Deno.args.includes('--dev')) {
+  atenasPath = '../mod.ts'
+  try {
+    await Deno.stat(atenasPath);
+  } catch (error) {
+    console.log(clc.green.text("[Atenas]: ") + clc.red.text("Error on finding Atenas Class, try remove --dev flag"));
+  }
+}
+
+let { Atenas } = await import(atenasPath)
 const CONFIG_FILE = join(Deno.cwd(), 'atlas.json');
 
 let config: Config = {
