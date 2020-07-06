@@ -1,5 +1,5 @@
 # Atenas CLI
-#### Development tools and libraries specialized for Atenas
+#### Development tools specialized for Atenas
 
 ## Goal
 #### The Atenas CLI creates, manages, builds and starts your Atenas projects.
