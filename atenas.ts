@@ -14,7 +14,7 @@ if(Deno.args.includes('--dev')) {
 }
 
 let { Atenas } = await import(atenasPath)
-const CONFIG_FILE = join(Deno.cwd(), 'atlas.json');
+const CONFIG_FILE = join(Deno.cwd(), 'atenas.json');
 
 let config: Config = {
   host: '127.0.0.1',
