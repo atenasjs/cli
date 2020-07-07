@@ -1,5 +1,8 @@
-# Atenas
-#### The Deno framework for building server-side applications
+# Atenas CLI
+#### Development tools specialized for Atenas
+
+## Goal
+#### The Atenas CLI creates, manages, builds and starts your Atenas projects.
 
 ## Getting Started
 
@@ -13,4 +16,6 @@ Now you can install the CLI
 `$ deno install -f --allow-net --allow-read https://raw.githubusercontent.com/atenasjs/cli/master/atenas.ts`
 
 ## Using
-Coming Soon
+
+To start your project:
+`$ atenas start`
