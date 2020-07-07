@@ -1,16 +1,12 @@
 import { readJson } from 'https://deno.land/std/fs/read_json.ts';
 import { exists } from 'https://deno.land/std/fs/exists.ts';
 import { join } from 'https://deno.land/std/path/mod.ts';
-import clc from 'https://deno.land/x/color/index.ts'
-
+import clc from 'https://deno.land/x/color/index.ts';
+import StartScript from './start.ts';
 let atenasPath = 'https://raw.githubusercontent.com/atenasjs/atenas/master/mod.ts';
+
 if(Deno.args.includes('--dev')) {
-  atenasPath = '../mod.ts'
-  try {
-    await Deno.stat(atenasPath);
-  } catch (error) {
-    console.log(clc.green.text("[Atenas]: ") + clc.red.text("Error on finding Atenas Class, try remove --dev flag"));
-  }
+  atenasPath = 'file:\\\\' + Deno.cwd() +'/../mod.ts'
 }
 
 let { Atenas } = await import(atenasPath)
@@ -31,37 +27,36 @@ const scripts = [
 
 async function main() {
   if (await exists(CONFIG_FILE)) {
-      config = (await readJson(CONFIG_FILE)) as Config;
+      config = Object.assign(config, (await readJson(CONFIG_FILE)) as Config);
       if(scripts.includes(Deno.args[0])) {
         switch (Deno.args[0]) {
           case 'start':
-            start()
+            StartScript(Atenas, config)
             break;
         
           default:
-            console.log(clc.green.text("[Atenas]: ") + clc.red.text("This command not exists"));
+            console.log(clc.bgYellow.text("[Atenas]: ") +  clc.bgBlack.text(clc.red.text("This command not exists")));
+            console.log(clc.reset.text(''))
             Deno.exit();
             break;
         }
       } else {
-        console.log(clc.green.text("[Atenas]: ") + clc.red.text("You need insert a command"));
+        console.log(clc.bgYellow.text("[Atenas]: ") +  clc.bgBlack.text(clc.red.text("You need insert a command")));
+        console.log(clc.reset.text(''))
         Deno.exit();
       }
   } else {
-    console.log(clc.green.text("[Atenas]: ") + clc.red.text("Config file does not exists"));
+    console.log(clc.bgRed.text("[Atenas]:") + clc.bgBlack.text(clc.red.text(` Could not find Atenas Configuration File "atenas.json". Please, ensure that you are running this command in the appropriate directory (inside Atenas workspace).`)));
+    console.log(clc.reset.text(''))
     Deno.exit();
   }
-}
-
-function start(){
-  (new Atenas(config));
 }
 
 if (import.meta.main) {
   main();
 }
 
-interface Config {
+export interface Config {
   host: string;
   port: number;
   root: string;
