@@ -1,7 +1,8 @@
-import { readJson, exists, join, clc } from './deps.ts';
-import { Config } from './src/interfaces/config.interface.ts'
+import eConsole from './src/utils/Console.ts';
 import { Start } from './src/scripts/scripts.ts'
 import { requireConfig } from './src/operators/config.ts';
+import { Routes } from './src/scripts/commands/routes.ts';
+
 /**
  * Set atenas mod filename
  */
@@ -14,7 +15,7 @@ if(Deno.args.includes('--dev')) {
   /**
    * Warn in console
    */
-  console.log(clc.bgYellow.text(clc.black.text("[Atenas]: Running in development mode")) + clc.bgBlack.text(''));
+  eConsole.warn('Running in development mode');
 
   /**
    * Set Atenas filename dev path
@@ -27,30 +28,27 @@ if(Deno.args.includes('--dev')) {
  */
 let { Atenas } = await import(atenasFilename)
 
-/**
- * Getting filename
- */
-const CONFIG_FILE = join(Deno.cwd(), 'atenas.json');
-
-
 async function main() {
   if(Deno.args[0]) {
     switch (Deno.args[0]) {
       case 'start':
-        requireConfig(CONFIG_FILE, (config: any) => {
+        requireConfig((config: any) => {
           Start(Atenas, config)
+        })
+        break;
+      case 'routes:list':
+        requireConfig((config: any) => {
+          Routes(config)
         })
         break;
 
       default:
-        console.log(clc.bgYellow.text(clc.black.text("[Atenas]:")) +  clc.bgBlack.text(clc.red.text(" This command not exists")));
-        console.log(clc.reset.text(''))
+        eConsole.error('This command not exists');
         Deno.exit();
         break;
     }
   } else {
-    console.log(clc.bgYellow.text(clc.black.text("[Atenas]:")) +  clc.bgBlack.text(clc.red.text(" You need insert a command")));
-    console.log(clc.reset.text(''))
+    eConsole.warn('You need insert a command')
     Deno.exit();
   }
 }

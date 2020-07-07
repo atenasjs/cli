@@ -1,7 +1,10 @@
-import { readJson, exists, join, clc } from '../../deps.ts';
+import { readJson, exists, join } from '../../deps.ts';
+import eConsole from '../utils/Console.ts'
 import { Config } from '../interfaces/config.interface.ts'
 
-export const requireConfig = async (path: any, callback: Function) => {
+export const requireConfig = async (callback: Function) => {
+  const path = join(Deno.cwd(), 'atenas.json');
+
   /**
    * Set default configs
    */
@@ -18,8 +21,8 @@ export const requireConfig = async (path: any, callback: Function) => {
     config = Object.assign(config, (await readJson(path)));
     callback(config)
   } else {
-    console.log(clc.bgRed.text("[Atenas]:") + clc.bgBlack.text(clc.red.text(` Could not find Atenas Configuration File "atenas.json". Please, ensure that you are running this command in the appropriate directory (inside Atenas workspace).`)));
-    console.log(clc.reset.text(''))
-    Deno.exit();
+    eConsole.error(`Could not find Atenas Configuration File "atenas.json".
+Please, ensure that you are running this command in the appropriate
+directory (inside Atenas workspace).`);
   }
 }
