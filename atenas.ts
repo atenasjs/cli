@@ -1,17 +1,40 @@
-import { readJson } from 'https://deno.land/std/fs/read_json.ts';
-import { exists } from 'https://deno.land/std/fs/exists.ts';
-import { join } from 'https://deno.land/std/path/mod.ts';
-import clc from 'https://deno.land/x/color/index.ts';
-import StartScript from './start.ts';
-let atenasPath = 'https://raw.githubusercontent.com/atenasjs/atenas/master/mod.ts';
+import { readJson, exists, join, clc } from './deps.ts';
+import { Config } from './src/interfaces/config.interface.ts'
+import { Start } from './src/scripts/scripts.ts'
+/**
+ * Set atenas mod filename
+ */
+let atenasFilename = 'https://raw.githubusercontent.com/atenasjs/atenas/master/mod.ts';
 
+/**
+ * Is a development atenas mode?
+ */
 if(Deno.args.includes('--dev')) {
-  atenasPath = 'file:\\\\' + Deno.cwd() +'/../mod.ts'
+  /**
+   * Warn in console
+   */
+  console.log(clc.bgYellow.text(clc.black.text("[Atenas]: Running in development mode")) + clc.bgBlack.text(''));
+
+  /**
+   * Set Atenas filename dev path
+   */
+  atenasFilename = 'file:\\\\' + Deno.cwd() +'/../mod.ts'
 }
 
-let { Atenas } = await import(atenasPath)
+/**
+ * Import Atenas
+ */
+let { Atenas } = await import(atenasFilename)
+
+/**
+ * Getting filename
+ */
 const CONFIG_FILE = join(Deno.cwd(), 'atenas.json');
 
+
+/**
+ * Set default configs
+ */
 let config: Config = {
   host: '127.0.0.1',
   port: 3000,
@@ -21,6 +44,9 @@ let config: Config = {
   }
 };
 
+/**
+ * Commands available
+ */
 const scripts = [
   'start'
 ]
@@ -28,20 +54,20 @@ const scripts = [
 async function main() {
   if (await exists(CONFIG_FILE)) {
       config = Object.assign(config, (await readJson(CONFIG_FILE)) as Config);
-      if(scripts.includes(Deno.args[0])) {
+      if(Deno.args[0]) {
         switch (Deno.args[0]) {
           case 'start':
-            StartScript(Atenas, config)
+            Start(Atenas, config)
             break;
-        
+
           default:
-            console.log(clc.bgYellow.text("[Atenas]: ") +  clc.bgBlack.text(clc.red.text("This command not exists")));
+            console.log(clc.bgYellow.text(clc.black.text("[Atenas]:")) +  clc.bgBlack.text(clc.red.text(" This command not exists")));
             console.log(clc.reset.text(''))
             Deno.exit();
             break;
         }
       } else {
-        console.log(clc.bgYellow.text("[Atenas]: ") +  clc.bgBlack.text(clc.red.text("You need insert a command")));
+        console.log(clc.bgYellow.text(clc.black.text("[Atenas]:")) +  clc.bgBlack.text(clc.red.text(" You need insert a command")));
         console.log(clc.reset.text(''))
         Deno.exit();
       }
@@ -54,15 +80,4 @@ async function main() {
 
 if (import.meta.main) {
   main();
-}
-
-export interface Config {
-  host: string;
-  port: number;
-  root: string;
-  path: PathConfig;
-}
-
-interface PathConfig {
-  meta: string
 }
