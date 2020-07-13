@@ -2,6 +2,8 @@ import eConsole from './src/utils/Console.ts';
 import { Start } from './src/scripts/scripts.ts'
 import { requireConfig } from './src/operators/config.ts';
 import { Routes } from './src/scripts/commands/routes.ts';
+import { New } from './src/scripts/commands/new.ts';
+import { Cache } from './src/scripts/commands/cache.ts';
 
 /**
  * Set atenas mod filename
@@ -35,6 +37,12 @@ async function main() {
         requireConfig((config: any) => {
           Start(Atenas, config)
         })
+        break;
+      case 'new':
+        New()
+        break;
+      case 'cache':
+        Cache()
         break;
       case 'routes:list':
         requireConfig((config: any) => {
