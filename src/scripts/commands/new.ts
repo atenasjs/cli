@@ -1,13 +1,5 @@
 import { exists, join } from '../../../deps.ts';
 import eConsole from '../../utils/Console.ts';
-import { tar } from "https://deno.land/x/compress@v0.0.2/mod.ts";
-import { download } from "https://deno.land/x/download/mod.ts";import {
-  gzipDecode,
-  gzipEncode,
-} from "https://github.com/manyuanrong/wasm_gzip/raw/master/mod.ts";
-
-import { soxa } from 'https://deno.land/x/soxa/mod.ts'
-
 export const New = async () => {
 
   const config = {

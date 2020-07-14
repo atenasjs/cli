@@ -8,7 +8,7 @@ import { Cache } from './src/scripts/commands/cache.ts';
 /**
  * Set atenas mod filename
  */
-let atenasFilename = 'https://raw.githubusercontent.com/atenasjs/atenas/master/mod.ts';
+let atenasFilename = 'https://deno.land/x/atenas/mod.ts';
 
 /**
  * Is a development atenas mode?
