@@ -1,5 +1,5 @@
 import eConsole from './src/utils/Console.ts';
-import { Start } from './src/scripts/scripts.ts'
+import { Start } from './src/scripts/scripts.ts';
 import { requireConfig } from './src/operators/config.ts';
 import { Routes } from './src/scripts/commands/routes.ts';
 import { New } from './src/scripts/commands/new.ts';
@@ -14,7 +14,7 @@ let atenasFilename = 'https://deno.land/x/atenas/mod.ts';
 /**
  * Is a development atenas mode?
  */
-if(Deno.args.includes('--dev')) {
+if (Deno.args.includes('--dev')) {
   /**
    * Warn in console
    */
@@ -23,35 +23,35 @@ if(Deno.args.includes('--dev')) {
   /**
    * Set Atenas filename dev path
    */
-  atenasFilename = 'file:\\\\' + Deno.cwd() +'/../mod.ts'
+  atenasFilename = 'file:\\\\' + Deno.cwd() + '/../mod.ts';
 }
 
 /**
  * Import Atenas
  */
-let { Atenas } = await import(atenasFilename)
+let { Atenas } = await import(atenasFilename);
 
 async function main() {
-  if(Deno.args[0]) {
+  if (Deno.args[0]) {
     switch (Deno.args[0]) {
       case 'start':
         requireConfig((config: any) => {
-          Start(Atenas, config)
-        })
+          Start(Atenas, config);
+        });
         break;
       case 'new':
-        New()
+        New();
         break;
       case 'cache':
-        Cache()
+        Cache();
         break;
       case 'routes:list':
         requireConfig((config: any) => {
-          Routes(config)
-        })
+          Routes(config);
+        });
         break;
       case 'feedback':
-        feedback()
+        feedback();
         break;
 
       default:
@@ -60,7 +60,7 @@ async function main() {
         break;
     }
   } else {
-    eConsole.warn('You need insert a command')
+    eConsole.warn('You need insert a command');
     Deno.exit();
   }
 }
