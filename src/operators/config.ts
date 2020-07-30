@@ -4,6 +4,7 @@ import { Config } from '../interfaces/config.interface.ts'
 
 export const requireConfig = async (callback: Function) => {
   const path = join(Deno.cwd(), 'atenas.json');
+  console.log(path)
 
   /**
    * Set default configs

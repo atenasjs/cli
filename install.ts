@@ -7,7 +7,7 @@ const spinner = new Kia('');
 spinner.start();
 await spinner.set('Installing atenas...');
 
-await exec('deno install -f --allow-net --allow-read --allow-write --allow-run http://git.io/atenas-cli')
+await exec('deno install -f --allow-net --allow-read --allow-write --allow-run -n atenas atenas.ts')
 
 await spinner.stop()
 
@@ -19,5 +19,4 @@ const answers = await Prompt.prompts([
 
 if(!answers.feedback) {
   await exec('atenas feedback --disable')
-  Console.warn('You can enable this option again using: $ atenas feedback --enable');
 }

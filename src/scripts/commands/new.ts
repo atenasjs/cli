@@ -1,5 +1,6 @@
 import { exists, join } from '../../../deps.ts';
 import eConsole from '../../utils/Console.ts';
+import { sendFeedback } from '../../operators/sendFeedback.ts'
 
 export const New = async () => {
 
@@ -42,6 +43,8 @@ export const New = async () => {
   if (!cloneResult.success) {
     throw new Error("Failed to clone.");
   }
+
+  await sendFeedback('new')
 
   // eConsole.log('Fetching releases')
 
