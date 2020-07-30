@@ -7,7 +7,7 @@ const spinner = new Kia('');
 spinner.start();
 await spinner.set('Installing atenas...');
 
-await exec('deno install -f --allow-net --allow-read --allow-write --allow-run -n atenas http://git.io/atenas-cli')
+await exec('deno install -f --allow-net --allow-read --allow-write --allow-run -n atenas atenas.ts')
 
 await spinner.stop()
 

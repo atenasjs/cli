@@ -1,3 +1,6 @@
 {
-  "feedback": true
+  "feedback": {
+    "enabled": true,
+    "url": "https://log-atenasjs.netlify.app/.netlify/functions/server/"
+  }
 }
