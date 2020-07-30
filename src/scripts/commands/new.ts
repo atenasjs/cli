@@ -1,21 +1,20 @@
 import { exists, join } from '../../../deps.ts';
 import eConsole from '../../utils/Console.ts';
-import { sendFeedback } from '../../operators/sendFeedback.ts'
+import { sendFeedback } from '../../operators/sendFeedback.ts';
 
 export const New = async () => {
-
   const config = {
-    name: 'atenas'
-  }
+    name: 'atenas',
+  };
 
-  if(Deno.args[1]) {
+  if (Deno.args[1]) {
     switch (Deno.args[1]) {
       case '--name':
-        if(Deno.args[2]) {
-          config.name = Deno.args[2].replace(/ /g,"_")
+        if (Deno.args[2]) {
+          config.name = Deno.args[2].replace(/ /g, '_');
         } else {
           eConsole.log('Argument of --name not is provided');
-          Deno.exit()
+          Deno.exit();
         }
         break;
       default:
@@ -27,7 +26,7 @@ export const New = async () => {
 
   if (isCloned) {
     eConsole.error(`Folder "${config.name}" already exists`);
-    Deno.exit(1)
+    Deno.exit(1);
   }
 
   /**
@@ -35,16 +34,23 @@ export const New = async () => {
    * 'git', 'clone', '--depth', '1', '--single-branch', '--branch', 'stable',
    */
 
-  const clone =Deno.run({
-    cmd: ['git', 'clone', '--depth', '1', 'git@github.com:atenasjs/starter.git', config.name]
-  })
+  const clone = Deno.run({
+    cmd: [
+      'git',
+      'clone',
+      '--depth',
+      '1',
+      'git@github.com:atenasjs/starter.git',
+      config.name,
+    ],
+  });
   const cloneResult = await clone.status();
 
   if (!cloneResult.success) {
-    throw new Error("Failed to clone.");
+    throw new Error('Failed to clone.');
   }
 
-  await sendFeedback('new')
+  await sendFeedback('new');
 
   // eConsole.log('Fetching releases')
 
@@ -83,11 +89,9 @@ export const New = async () => {
   //   console.log(err)
   // });
 
-//   }):
-//   .catch(function (error: any) {
-//     eConsole.error(error);
-//     Deno.exit()
-//   })
-
-}
-
+  //   }):
+  //   .catch(function (error: any) {
+  //     eConsole.error(error);
+  //     Deno.exit()
+  //   })
+};

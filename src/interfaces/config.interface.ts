@@ -6,5 +6,5 @@ export interface Config {
 }
 
 interface PathConfig {
-  meta: string
+  meta: string;
 }
