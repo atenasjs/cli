@@ -49,6 +49,9 @@ async function main() {
           Routes(config)
         })
         break;
+      case 'feedback':
+        // Feedback()
+        break;
 
       default:
         eConsole.error('This command not exists');
