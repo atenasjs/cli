@@ -1,6 +1,1 @@
-{
-  "feedback": {
-    "enabled": true,
-    "url": "https://log-atenasjs.netlify.app/.netlify/functions/server/"
-  }
-}
+{"feedback":{"enabled":true,"url":"https://log-atenasjs.netlify.app/.netlify/functions/server/"}}

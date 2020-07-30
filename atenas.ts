@@ -4,6 +4,7 @@ import { requireConfig } from './src/operators/config.ts';
 import { Routes } from './src/scripts/commands/routes.ts';
 import { New } from './src/scripts/commands/new.ts';
 import { Cache } from './src/scripts/commands/cache.ts';
+import { feedback } from './src/scripts/commands/feedback.ts';
 
 /**
  * Set atenas mod filename
@@ -50,7 +51,7 @@ async function main() {
         })
         break;
       case 'feedback':
-        // Feedback()
+        feedback()
         break;
 
       default:

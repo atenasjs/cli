@@ -19,5 +19,4 @@ const answers = await Prompt.prompts([
 
 if(!answers.feedback) {
   await exec('atenas feedback --disable')
-  Console.warn('You can enable this option again using: $ atenas feedback --enable');
 }
