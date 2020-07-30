@@ -8,7 +8,7 @@ spinner.start();
 await spinner.set('Installing atenas...');
 
 await exec(
-  'deno install -f --allow-net --allow-read --allow-write --allow-run -n atenas atenas.ts'
+  'deno install -f --allow-net --allow-read --allow-write --allow-run -n atenas https://git.io/atenas-cli'
 );
 
 await spinner.stop();
