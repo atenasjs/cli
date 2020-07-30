@@ -18,7 +18,7 @@ Now you can install the CLI
 
 ### Installing the Atenas CLI
 
-`$ deno install -f --allow-net --allow-read -allow-write --allow-run https://git.io/atenas`
+`$ deno run --allow-run https://git.io/atenas`
 
 ## Using
 
