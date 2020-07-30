@@ -13,7 +13,7 @@ Please read the [Getting Started](https://deno.land/manual/getting_started/insta
 Now you can install the CLI
 
 ### Installing the Atenas CLI
-`$ deno install -f --allow-net --allow-read -allow-write --allow-run https://raw.githubusercontent.com/atenasjs/cli/master/atenas.ts`
+`$ deno install -f --allow-net --allow-read -allow-write --allow-run https://git.io/atenas`
 
 ## Using
 
