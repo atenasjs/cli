@@ -1,4 +1,4 @@
-import { readJson, exists, join } from '../../deps.ts';
+import { exists, join } from '../../deps.ts';
 import eConsole from '../utils/Console.ts';
 import { Config } from '../interfaces/config.interface.ts';
 
@@ -19,7 +19,7 @@ export const requireConfig = async (callback: Function) => {
   };
 
   if (await exists(path)) {
-    config = Object.assign(config, await readJson(path));
+    config = Object.assign(config, JSON.parse(await Deno.readTextFile(path)));
     callback(config);
   } else {
     eConsole.error(`Could not find Atenas Configuration File "atenas.json".

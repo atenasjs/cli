@@ -1,4 +1,4 @@
-import { readJson, writeJson, exists, join } from '../../../deps.ts';
+import { exists, join } from '../../../deps.ts';
 import Console from '../../utils/Console.ts';
 export const feedback = async () => {
   const path = join(import.meta.url, '../../../../config.json').split(
@@ -14,7 +14,7 @@ export const feedback = async () => {
   }
 
   if (await exists(path)) {
-    config = Object.assign(config, await readJson(path));
+    config = Object.assign(config, JSON.parse(await Deno.readTextFile(path)));
   } else {
     config = {
       feedback: {
@@ -38,5 +38,6 @@ export const feedback = async () => {
     config.feedback.enabled = true;
   }
 
-  await writeJson(path, config);
+
+  await Deno.writeTextFile(path, JSON.stringify(config));
 };
