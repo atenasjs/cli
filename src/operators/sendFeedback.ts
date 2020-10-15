@@ -1,4 +1,4 @@
-import { readJson, exists, join } from '../../deps.ts';
+import { exists, join } from '../../deps.ts';
 import { denock } from 'https://deno.land/x/denock/mod.ts';
 
 export async function sendFeedback(to: 'start' | 'new') {
@@ -8,7 +8,7 @@ export async function sendFeedback(to: 'start' | 'new') {
   let config: any = {};
 
   if (await exists(path)) {
-    config = Object.assign(config, await readJson(path));
+    config = Object.assign(config, JSON.parse(await Deno.readTextFile(path)));
   } else {
     config = {
       feedback: {

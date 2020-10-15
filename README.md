@@ -8,7 +8,7 @@
 
 ## Getting Started
 
-First of all, you will need the deno installed, stay tuned to the version, the recommended one is ^v1.2.0
+First of all, you will need the deno installed, stay tuned to the version, the recommended one is v1.4.6
 
 #### Installing Deno
 
